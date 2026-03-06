@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const AuthModal = ({ onClose }) => {
-  // Logic
   const [isRegister, setIsRegister] = useState(false);
 
   return (
