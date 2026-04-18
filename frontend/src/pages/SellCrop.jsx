@@ -1,7 +1,19 @@
 import React from "react";
 import AddCropForm from "../components/AddCropForm";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SellCrop() {
+
+  const navigate = useNavigate();
+
+useEffect(() => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    navigate("/login");
+  }
+}, [navigate]);
   return (
     <section className="sell-page">
       <div className="container sell-layout">
