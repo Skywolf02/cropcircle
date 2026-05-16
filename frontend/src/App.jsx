@@ -8,6 +8,7 @@ import SellCrop from "./pages/SellCrop";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
+import CropInfo from "./pages/CropInfo";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/sell-crop" element={<SellCrop />} />
+          <Route path="/crop-info" element={<CropInfo />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/contact" element={<Contact />} />
