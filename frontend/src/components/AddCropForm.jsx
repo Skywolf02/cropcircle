@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function AddCropForm() {
   const navigate = useNavigate();
 
@@ -44,7 +47,12 @@ function AddCropForm() {
       return;
     }
 
-    if (!formData.title || !formData.price || !formData.location || !formData.image) {
+    if (
+      !formData.title ||
+      !formData.price ||
+      !formData.location ||
+      !formData.image
+    ) {
       setMessage("Please fill all fields and choose an image.");
       return;
     }
@@ -58,7 +66,7 @@ function AddCropForm() {
       cropData.append("location", formData.location);
       cropData.append("image", formData.image);
 
-      const res = await fetch("http://localhost:5000/api/crops", {
+      const res = await fetch(`${API_BASE_URL}/api/crops`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -82,6 +90,7 @@ function AddCropForm() {
       });
 
       const fileInput = document.getElementById("crop-image-input");
+
       if (fileInput) {
         fileInput.value = "";
       }
@@ -101,6 +110,7 @@ function AddCropForm() {
       <div className="form-grid">
         <div className="form-group">
           <label>Crop Name</label>
+
           <input
             type="text"
             name="title"
@@ -112,6 +122,7 @@ function AddCropForm() {
 
         <div className="form-group">
           <label>Price</label>
+
           <input
             type="number"
             name="price"
@@ -123,6 +134,7 @@ function AddCropForm() {
 
         <div className="form-group full-width">
           <label>Location</label>
+
           <input
             type="text"
             name="location"
@@ -134,6 +146,7 @@ function AddCropForm() {
 
         <div className="form-group full-width">
           <label>Crop Image</label>
+
           <input
             id="crop-image-input"
             type="file"

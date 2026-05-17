@@ -1,6 +1,10 @@
 import React from "react";
 
-function CropCard({ crop, showDelete = false, onDelete }) {
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+function CropCard({ crop, showDelete = false, onDelete, onBuy }) {
+
   const handleDelete = () => {
     if (onDelete) {
       onDelete(crop._id);
@@ -10,8 +14,9 @@ function CropCard({ crop, showDelete = false, onDelete }) {
   return (
     <article className="crop-card">
       <div className="crop-card-image-wrap">
+
         <img
-          src={`http://localhost:5000/uploads/${crop.image}`}
+          src={`${API_BASE_URL}/uploads/${crop.image}`}
           alt={crop.title}
           className="crop-card-image"
           onError={(e) => {
@@ -19,23 +24,34 @@ function CropCard({ crop, showDelete = false, onDelete }) {
               "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80";
           }}
         />
+
       </div>
 
       <div className="crop-card-content">
+
         <div className="crop-card-top">
           <h3>{crop.title}</h3>
-          <span className="crop-badge">Available</span>
+
+          <span className="crop-badge">
+            Available
+          </span>
         </div>
 
-        <p className="crop-price">₹{crop.price}</p>
-        <p className="crop-location">{crop.location}</p>
+        <p className="crop-price">
+          ₹{crop.price}
+        </p>
+
+        <p className="crop-location">
+          {crop.location}
+        </p>
 
         <div className="crop-card-actions">
+
           <button
             className="secondary-btn crop-action-btn"
-            onClick={() => alert(`Contact seller for ${crop.title}`)}
+            onClick={() => onBuy(crop)}
           >
-            Contact Seller
+            Buy Now
           </button>
 
           {showDelete && (
@@ -46,7 +62,9 @@ function CropCard({ crop, showDelete = false, onDelete }) {
               Delete Listing
             </button>
           )}
+
         </div>
+
       </div>
     </article>
   );

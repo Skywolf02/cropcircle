@@ -10,7 +10,9 @@ function SellCrop() {
 useEffect(() => {
   const token = localStorage.getItem("token");
 
-  if (!token) {
+  if (!token || token === "undefined" || token === "null") {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/login");
   }
 }, [navigate]);

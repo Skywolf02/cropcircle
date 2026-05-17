@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CropCard from "../components/CropCard";
+import PaymentModal from "../components/PaymentModal";
+
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 function Marketplace() {
   const [crops, setCrops] = useState([]);
@@ -7,15 +11,18 @@ function Marketplace() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [message, setMessage] = useState("");
+  const [selectedCrop, setSelectedCrop] = useState(null);
 
   const fetchCrops = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/crops");
+      const res = await fetch(`${API_BASE_URL}/api/crops`);
       const data = await res.json();
+
       setCrops(data);
       setFilteredCrops(data);
     } catch (error) {
       console.log(error);
+      setMessage("Failed to load crop listings.");
     } finally {
       setLoading(false);
     }
@@ -27,8 +34,11 @@ function Marketplace() {
 
   useEffect(() => {
     const result = crops.filter((crop) =>
-      `${crop.title} ${crop.location}`.toLowerCase().includes(search.toLowerCase())
+      `${crop.title} ${crop.location}`
+        .toLowerCase()
+        .includes(search.toLowerCase())
     );
+
     setFilteredCrops(result);
   }, [search, crops]);
 
@@ -40,11 +50,14 @@ function Marketplace() {
       return;
     }
 
-    const confirmDelete = window.confirm("Are you sure you want to delete this listing?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this listing?"
+    );
+
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/crops/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/crops/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -73,7 +86,8 @@ function Marketplace() {
             <p className="eyebrow">Marketplace</p>
             <h1>Browse available crop listings</h1>
             <p>
-              Find crops by name or location with a simple and clean browsing experience.
+              Find crops by name or location with a simple and clean browsing
+              experience.
             </p>
           </div>
 
@@ -101,9 +115,17 @@ function Marketplace() {
                 crop={crop}
                 showDelete={true}
                 onDelete={handleDelete}
+                onBuy={setSelectedCrop}
               />
             ))}
           </div>
+        )}
+
+        {selectedCrop && (
+          <PaymentModal
+            crop={selectedCrop}
+            onClose={() => setSelectedCrop(null)}
+          />
         )}
       </div>
     </section>
