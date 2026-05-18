@@ -1213,3 +1213,47 @@ background:white;
 cursor:pointer;
 font-weight:700;
 }
+.selected-payment {
+  border-color: var(--primary) !important;
+  background: #edf7ee !important;
+  color: var(--primary);
+}
+
+.upi-box {
+  background: #f8fbf6;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
+}
+
+.fake-qr {
+  width: 150px;
+  height: 150px;
+  margin: 14px auto;
+  background: white;
+  border: 8px solid #111;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 10px;
+}
+
+.fake-qr div {
+  background: #111;
+  border-radius: 3px;
+}
+
+.fake-qr div:nth-child(2),
+.fake-qr div:nth-child(5),
+.fake-qr div:nth-child(8),
+.fake-qr div:nth-child(11),
+.fake-qr div:nth-child(14) {
+  background: white;
+}
+
+.payment-success {
+  text-align: center;
+  display: grid;
+  gap: 16px;
+}
