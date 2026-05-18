@@ -1004,10 +1004,23 @@ input:focus {
   background: white;
   padding: 30px;
   border-radius: 24px;
-  width: min(500px, 100%);
+
+  width: min(540px, 100%);
   position: relative;
+
   display: grid;
   gap: 20px;
+
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.payment-modal::-webkit-scrollbar{
+  width:6px;
+}
+
+.payment-modal::-webkit-scrollbar-thumb{
+  background:#2f7d32;
+  border-radius:20px;
 }
 
 .payment-close {
