@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL;
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 function AddCropForm() {
   const navigate = useNavigate();
@@ -10,6 +9,7 @@ function AddCropForm() {
   const [formData, setFormData] = useState({
     title: "",
     price: "",
+    quantity: "",
     location: "",
     image: null,
   });
@@ -50,6 +50,7 @@ function AddCropForm() {
     if (
       !formData.title ||
       !formData.price ||
+      !formData.quantity ||
       !formData.location ||
       !formData.image
     ) {
@@ -63,6 +64,7 @@ function AddCropForm() {
       const cropData = new FormData();
       cropData.append("title", formData.title);
       cropData.append("price", formData.price);
+      cropData.append("quantity", formData.quantity);
       cropData.append("location", formData.location);
       cropData.append("image", formData.image);
 
@@ -85,6 +87,7 @@ function AddCropForm() {
       setFormData({
         title: "",
         price: "",
+        quantity: "",
         location: "",
         image: null,
       });
@@ -132,7 +135,19 @@ function AddCropForm() {
           />
         </div>
 
-        <div className="form-group full-width">
+        <div className="form-group">
+          <label>Quantity (kg)</label>
+
+          <input
+            type="number"
+            name="quantity"
+            placeholder="Enter quantity in kg"
+            value={formData.quantity}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
           <label>Location</label>
 
           <input

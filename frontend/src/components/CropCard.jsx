@@ -42,7 +42,11 @@ function CropCard({ crop, showDelete = false, onDelete, onBuy }) {
         </p>
 
         <p className="crop-location">
-          {crop.location}
+          🌾 Quantity: {crop.quantity} kg
+        </p>
+
+        <p className="crop-location">
+          📍 {crop.location}
         </p>
 
         <div className="crop-card-actions">

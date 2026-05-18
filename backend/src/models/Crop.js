@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const cropSchema = new mongoose.Schema(
   {
@@ -6,17 +6,26 @@ const cropSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
     price: {
       type: Number,
       required: true,
     },
+
+    quantity: {
+      type: Number,
+      required: true,
+    },
+
     location: {
       type: String,
       required: true,
     },
+
     description: {
       type: String,
     },
+
     image: {
       type: String,
     },
@@ -24,6 +33,6 @@ const cropSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Crop = mongoose.model('Crop', cropSchema);
+const Crop = mongoose.model("Crop", cropSchema);
 
 export default Crop;
