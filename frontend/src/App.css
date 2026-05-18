@@ -1308,3 +1308,64 @@ font-weight:700;
     grid-template-columns:1fr;
   }
 }
+.menu-toggle {
+  display: none;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-size: 1.4rem;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.brand-tagline {
+  font-size: 0.8rem;
+  color: #5c6b5d;
+}
+
+@media (max-width: 768px) {
+  .navbar-inner {
+    position: relative;
+  }
+
+  .brand-text {
+    font-size: 1.8rem;
+  }
+
+  .brand-tagline {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 18px;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 18px 35px rgba(0,0,0,0.12);
+    z-index: 999;
+  }
+
+  .nav-links.show-menu {
+    display: grid;
+    gap: 14px;
+  }
+
+  .nav-links a {
+    font-size: 1rem;
+    padding: 8px 0;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+}
