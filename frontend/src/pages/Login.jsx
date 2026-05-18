@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL;
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 function Login() {
   const navigate = useNavigate();
@@ -29,16 +28,13 @@ function Login() {
     try {
       setLoading(true);
 
-      const res = await fetch(
-        `${API_BASE_URL}/api/auth/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const data = await res.json();
 
@@ -54,7 +50,6 @@ function Login() {
       setTimeout(() => {
         navigate("/sell-crop");
       }, 800);
-
     } catch (error) {
       setMessage(error.message);
     } finally {
@@ -66,14 +61,9 @@ function Login() {
     <section className="auth-page auth-bg-login">
       <div className="container auth-wrapper">
         <div className="auth-card">
+          <p className="eyebrow">Welcome back</p>
 
-          <p className="eyebrow">
-            Welcome back
-          </p>
-
-          <h1>
-            Login to your account
-          </h1>
+          <h1>Login to your account</h1>
 
           <p className="auth-subtext">
             Access your crop listings and continue managing your posts.
@@ -82,10 +72,9 @@ function Login() {
           <form
             className="modern-form"
             onSubmit={handleSubmit}
+            autoComplete="off"
           >
-
             <div className="form-group full-width">
-
               <label>Email Address</label>
 
               <input
@@ -94,12 +83,11 @@ function Login() {
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
+                autoComplete="off"
               />
-
             </div>
 
             <div className="form-group full-width">
-
               <label>Password</label>
 
               <input
@@ -108,47 +96,33 @@ function Login() {
                 placeholder="Enter your password"
                 value={formData.password}
                 onChange={handleChange}
+                autoComplete="current-password"
               />
-
             </div>
 
             <div style={{ marginBottom: "15px" }}>
               <Link
                 to="/forgot-password"
                 style={{
-                  color:"#2f7d32",
-                  fontWeight:"600",
-                  textDecoration:"none",
+                  color: "#2f7d32",
+                  fontWeight: "600",
+                  textDecoration: "none",
                 }}
               >
                 Forgot Password?
               </Link>
             </div>
 
-            <button
-              type="submit"
-              className="primary-btn"
-            >
-              {loading
-                ? "Logging in..."
-                : "Login"}
+            <button type="submit" className="primary-btn">
+              {loading ? "Logging in..." : "Login"}
             </button>
-
           </form>
 
-          {message && (
-            <p className="form-message">
-              {message}
-            </p>
-          )}
+          {message && <p className="form-message">{message}</p>}
 
           <p className="auth-switch">
-            New here?{" "}
-            <Link to="/signup">
-              Create an account
-            </Link>
+            New here? <Link to="/signup">Create an account</Link>
           </p>
-
         </div>
       </div>
     </section>
